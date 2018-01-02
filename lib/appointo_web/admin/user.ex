@@ -1,7 +1,7 @@
 defmodule Appointo.ExAdmin.User do
   use ExAdmin.Register
 
-  register_resource Appointo.Accounts.User do
+  register_resource Appointo.Coherence.User do
     index do
       selectable_column()
 

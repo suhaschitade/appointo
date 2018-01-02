@@ -2,6 +2,7 @@ defmodule AppointoWeb.Router do
   use AppointoWeb, :router
   use ExAdmin.Router
   use Coherence.Router
+  use PhoenixOauth2Provider.Router
  
 
   pipeline :browser do
@@ -25,17 +26,25 @@ defmodule AppointoWeb.Router do
   scope "/" do
     pipe_through :browser
     coherence_routes()
-  end
-
- 
+  end 
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  
+  pipeline :api_auth do
+    plug ExOauth2Provider.Plug.VerifyHeader, realm: "Bearer"
+    plug ExOauth2Provider.Plug.EnsureAuthenticated
+  end
 
-  
+  pipeline :oauth_public do
+    plug :put_secure_browser_headers
+  end
+
+  scope "/" do
+    pipe_through :oauth_public
+    oauth_routes :public
+  end
 
  
 
@@ -43,7 +52,7 @@ defmodule AppointoWeb.Router do
    scope "/" do
     pipe_through :protected
     coherence_routes :protected
-
+    oauth_routes :protected
   end
 
 
@@ -60,6 +69,11 @@ defmodule AppointoWeb.Router do
    scope "/admin", ExAdmin do
     pipe_through :browser
     admin_routes()
+  end
+
+  scope "/api/v1", MyappWeb.API.V1 do
+    pipe_through :api_auth
+    resources "/accounts", UserController
   end
 
   # Other scopes may use custom stacks.

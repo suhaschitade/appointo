@@ -41,7 +41,7 @@ defmodule Appointo.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.13.1"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:phoenix_oauth2_provider, "~> 0.3.0"}
+      {:phoenix_oauth2_provider, "~> 0.3.0"},
       {:cowboy, "~> 1.0"},
       {:poison, "~> 3.1"},
       {:coherence, "~> 0.5"},

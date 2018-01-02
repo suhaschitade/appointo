@@ -1,15 +1,15 @@
 defmodule AppointoWeb.API.V1.UserControllerTest do
   use AppointoWeb.ConnCase
 
-  alias Appointo.Accounts
-  alias Appointo.Accounts.User
+  alias Appointo.Users
+  alias Appointo.Users.User
 
   @create_attrs %{}
   @update_attrs %{}
   @invalid_attrs %{}
 
   def fixture(:user) do
-    {:ok, user} = Accounts.create_user(@create_attrs)
+    {:ok, user} = Users.create_user(@create_attrs)
     user
   end
 

@@ -58,11 +58,9 @@ config :coherence, AppointoWeb.Coherence.Mailer,
 # %% End Coherence Configuration %%
 
 
-
-
 config :phoenix_oauth2_provider, PhoenixOauth2Provider,
   module: Appointo,
   current_resource_owner: :current_user,
   repo: Appointo.Repo,
-  resource_owner: Appointo.Accounts.User
+  resource_owner: Appointo.Coherence.User
 
